@@ -4,7 +4,7 @@ import { THEME } from '../styles/theme';
 
 const MainScreen = ({ navigation }) => {
     const navigateToPhotoScreen = () => {
-        navigation.navigate('Photo');
+        navigation.navigate('Photos');
     };
 
     return (
