@@ -24,7 +24,7 @@ export default function App() {
                 <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen name={'Library'} component={MainScreen} options={styleOptions} />
-                        <Stack.Screen name={'Photos'} component={PhotoScreen} options={styleOptions} />
+                        <Stack.Screen name={'Photo'} component={PhotoScreen} options={styleOptions} />
                     </Stack.Navigator>
                 </NavigationContainer>
                 <StatusBar style={'auto'} />
