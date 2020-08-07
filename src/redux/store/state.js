@@ -1,5 +1,10 @@
 const state = {
-    photosArr: [],
+    mainScreen: {
+        photosArr: [],
+    },
+    photoScreen: {
+        photoUrl: '',
+    },
 };
 
 export default state;

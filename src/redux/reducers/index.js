@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import photosArr from './photosArrReducer';
+import mainScreen from './mainScreenReducer';
+import photoScreen from './photoScreenReducer';
 
 const rootReducer = combineReducers({
-    photosArr,
+    mainScreen,
+    photoScreen,
 });
 
 export default rootReducer;

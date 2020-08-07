@@ -17,7 +17,7 @@ const styleOptions = {
     headerTintColor: THEME.TEXT_COLOR,
 };
 
-export default function App() {
+const App = () => {
     return (
         <Provider store={store}>
             <View style={styles.container}>
@@ -31,10 +31,12 @@ export default function App() {
             </View>
         </Provider>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
 });
+
+export default App;

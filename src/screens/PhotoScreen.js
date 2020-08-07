@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { View, StyleSheet, Image } from 'react-native';
 import { THEME } from '../styles/theme';
 
-const PhotoScreen = () => {
+const PhotoScreen = ({ photoScreen }) => {
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.text}>PhotoScreen</Text>
+            <Image style={styles.imgStyle} source={{ uri: photoScreen.photoUrl }} />
         </View>
     );
 };
@@ -17,9 +18,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: THEME.BG_COLOR,
     },
-    text: {
-        color: THEME.TEXT_COLOR,
+    imgStyle: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'contain',
     },
 });
 
-export default PhotoScreen;
+const mapState = (state) => ({
+    photoScreen: state.photoScreen,
+});
+
+const mapDispatch = (dispatch) => ({});
+
+export default connect(mapState, mapDispatch)(PhotoScreen);

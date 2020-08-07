@@ -1,16 +1,42 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { THEME } from '../styles/theme';
+import { getAllPhotosAC, setPhotoInPhotoScreenAC } from '../redux/actions/photosAction';
+import ImgSmall from '../components/ImgSmall';
 
-const MainScreen = ({ navigation }) => {
-    const navigateToPhotoScreen = () => {
+const MainScreen = ({ navigation, getAllPhotos, photosData, setPhotoInPhotoScreen }) => {
+    useEffect(() => {
+        getAllPhotos();
+    }, []);
+
+    const handlePhotoPress = (url) => {
+        setPhotoInPhotoScreen(url);
         navigation.navigate('Photo');
     };
 
+    if (!photosData.length) {
+        return (
+            <View style={styles.wrapperError}>
+                <Text style={styles.text}>Opps... There are no photos.</Text>
+            </View>
+        );
+    }
+
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.text}>MainScreen</Text>
-            <Button title={'Go to Photo'} onPress={navigateToPhotoScreen} />
+            <FlatList
+                data={photosData}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <ImgSmall
+                        url={item.urls.regular}
+                        onPhotoPress={handlePhotoPress}
+                        user={item.user}
+                        desc={item.alt_description}
+                    />
+                )}
+            />
         </View>
     );
 };
@@ -18,13 +44,26 @@ const MainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: THEME.BG_COLOR,
+    },
+    wrapperError: {
+        flex: 1,
+        backgroundColor: THEME.BG_COLOR,
+        alignItems: 'center',
+        padding: 30,
     },
     text: {
         color: THEME.TEXT_COLOR,
     },
 });
 
-export default MainScreen;
+const mapState = (state) => ({
+    photosData: state.mainScreen.photosArr,
+});
+
+const mapDispatch = (dispatch) => ({
+    getAllPhotos: () => dispatch(getAllPhotosAC()),
+    setPhotoInPhotoScreen: (url) => dispatch(setPhotoInPhotoScreenAC(url)),
+});
+
+export default connect(mapState, mapDispatch)(MainScreen);
