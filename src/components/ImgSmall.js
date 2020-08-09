@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import UserBlock from './UserBlock';
 
 const ImgSmall = ({ url, onPhotoPress, user, desc }) => {
